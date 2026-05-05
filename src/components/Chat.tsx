@@ -9,9 +9,10 @@ interface Props {
   partnerId: string;
   partnerName: string;
   partnerUsername: string;
+  onBack?: () => void;
 }
 
-export default function Chat({ partnerId, partnerName, partnerUsername }: Props) {
+export default function Chat({ partnerId, partnerName, partnerUsername, onBack }: Props) {
   const { state, dispatch, decryptAndStore } = useApp();
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
@@ -131,6 +132,13 @@ export default function Chat({ partnerId, partnerName, partnerUsername }: Props)
   return (
     <div className={styles.chat}>
       <div className={styles.header}>
+        {onBack && (
+          <button className={styles.backBtn} onClick={onBack} aria-label="Back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+        )}
         <div className={styles.headerAvatar}>{partnerName[0].toUpperCase()}</div>
         <div>
           <div className={styles.headerName}>{partnerName}</div>

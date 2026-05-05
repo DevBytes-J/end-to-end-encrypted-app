@@ -18,6 +18,24 @@
   flex-shrink: 0;
 }
 
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: none;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+}
+.backBtn:hover { color: var(--text); background: var(--surface2); }
+
+@media (max-width: 640px) {
+  .backBtn { display: flex; }
+}
+
 .headerAvatar {
   width: 40px;
   height: 40px;

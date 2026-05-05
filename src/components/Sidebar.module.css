@@ -1,6 +1,5 @@
 .sidebar {
-  width: 300px;
-  min-width: 300px;
+  width: 100%;
   background: var(--surface);
   border-right: 1px solid var(--border);
   display: flex;
@@ -30,7 +29,13 @@
   text-shadow: 0 1px 0 #3a3a3c, 0 0 20px rgba(255,209,220,0.1);
 }
 
-.logoutBtn {
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.iconBtn {
   background: none;
   border: none;
   color: var(--text-muted);
@@ -41,8 +46,7 @@
   align-items: center;
   transition: color 0.15s, background 0.15s;
 }
-
-.logoutBtn:hover { color: var(--error); background: rgba(248,113,113,0.08); }
+.iconBtn:hover { color: var(--text); background: var(--surface2); }
 
 .userInfo {
   display: flex;
@@ -68,47 +72,6 @@
 
 .userName { font-size: 14px; font-weight: 600; color: var(--text); }
 .userHandle { font-size: 12px; color: var(--text-muted); }
-
-.searchWrap {
-  position: relative;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-}
-
-.searchIcon {
-  position: absolute;
-  left: 28px;
-  color: var(--text-sub);
-  pointer-events: none;
-}
-
-.search {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 9px 12px 9px 36px;
-  color: var(--text);
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.search:focus { border-color: var(--accent); }
-.search::placeholder { color: var(--text-sub); }
-
-.spinner {
-  position: absolute;
-  right: 28px;
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
 
 .listLabel {
   font-size: 11px;
