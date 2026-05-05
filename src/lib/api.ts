@@ -73,11 +73,11 @@ export function register(body: {
   username: string; display_name: string; password: string;
   public_key: string; wrapped_private_key: string; pbkdf2_salt: string;
 }): Promise<AuthResponse> {
-  return request("/auth/register", { method: "POST", body: JSON.stringify(body) });
+  return request("/auth/register", { method: "POST", body: JSON.stringify(body) }, false);
 }
 
 export function login(username: string, password: string): Promise<AuthResponse> {
-  return request("/auth/login", { method: "POST", body: JSON.stringify({ username, password }) });
+  return request("/auth/login", { method: "POST", body: JSON.stringify({ username, password }) }, false);
 }
 
 export function logout(): Promise<unknown> {
