@@ -1,12 +1,13 @@
 .sidebar {
   width: 300px;
   min-width: 300px;
-  background: #1a1d27;
-  border-right: 1px solid #2a2d3a;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  animation: fadeIn 0.3s ease both;
 }
 
 .header {
@@ -14,45 +15,48 @@
   align-items: center;
   justify-content: space-between;
   padding: 18px 16px 14px;
-  border-bottom: 1px solid #2a2d3a;
+  border-bottom: 1px solid var(--border);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #f0f2f5;
+  gap: 9px;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2C2C2E;
+  text-shadow: 0 1px 0 #3a3a3c, 0 0 20px rgba(255,209,220,0.1);
 }
 
 .logoutBtn {
   background: none;
   border: none;
-  color: #6b7280;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 6px;
-  border-radius: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   transition: color 0.15s, background 0.15s;
 }
 
-.logoutBtn:hover { color: #f87171; background: rgba(248,113,113,0.1); }
+.logoutBtn:hover { color: var(--error); background: rgba(248,113,113,0.08); }
 
 .userInfo {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
-  border-bottom: 1px solid #2a2d3a;
+  border-bottom: 1px solid var(--border);
 }
 
 .avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #2563eb;
+  background: var(--accent);
   color: white;
   font-weight: 700;
   font-size: 15px;
@@ -62,13 +66,13 @@
   flex-shrink: 0;
 }
 
-.userName { font-size: 14px; font-weight: 600; color: #f0f2f5; }
-.userHandle { font-size: 12px; color: #6b7280; }
+.userName { font-size: 14px; font-weight: 600; color: var(--text); }
+.userHandle { font-size: 12px; color: var(--text-muted); }
 
 .searchWrap {
   position: relative;
   padding: 12px 16px;
-  border-bottom: 1px solid #2a2d3a;
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
 }
@@ -76,42 +80,40 @@
 .searchIcon {
   position: absolute;
   left: 28px;
-  color: #4b5563;
+  color: var(--text-sub);
   pointer-events: none;
 }
 
 .search {
   width: 100%;
-  background: #0f1117;
-  border: 1px solid #2a2d3a;
-  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   padding: 9px 12px 9px 36px;
-  color: #f0f2f5;
+  color: var(--text);
   font-size: 13px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s;
 }
 
-.search:focus { border-color: #2563eb; }
-.search::placeholder { color: #4b5563; }
+.search:focus { border-color: var(--accent); }
+.search::placeholder { color: var(--text-sub); }
 
 .spinner {
   position: absolute;
   right: 28px;
   width: 14px;
   height: 14px;
-  border: 2px solid #2a2d3a;
-  border-top-color: #2563eb;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
-
 .listLabel {
   font-size: 11px;
   font-weight: 600;
-  color: #4b5563;
+  color: var(--text-sub);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 10px 16px 6px;
@@ -128,7 +130,7 @@
 .empty {
   padding: 24px 16px;
   font-size: 13px;
-  color: #4b5563;
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -138,27 +140,28 @@
   gap: 10px;
   padding: 10px 16px;
   cursor: pointer;
-  transition: background 0.1s;
-  border-radius: 0;
+  transition: background 0.15s;
+  animation: fadeIn 0.25s ease both;
 }
 
-.item:hover { background: #22263a; }
-.active { background: #1e2d5a !important; }
+.item:hover { background: var(--surface2); }
+.active { background: rgba(244,63,94,0.08) !important; border-right: 2px solid var(--accent); }
 
 .itemAvatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #374151;
-  color: #d1d5db;
+  background: var(--surface2);
+  color: var(--text-muted);
   font-weight: 700;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid var(--border);
 }
 
 .itemInfo { display: flex; flex-direction: column; min-width: 0; }
-.itemName { font-size: 14px; font-weight: 600; color: #f0f2f5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.itemSub { font-size: 12px; color: #6b7280; }
+.itemName { font-size: 15px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.itemSub { font-size: 13px; color: var(--text-muted); }

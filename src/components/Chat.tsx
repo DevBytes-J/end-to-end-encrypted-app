@@ -155,7 +155,7 @@ export default function Chat({ partnerId, partnerName, partnerUsername }: Props)
           return (
             <div key={m.id} className={`${styles.bubble} ${isMine ? styles.mine : styles.theirs}`}>
               {m.text === null ? (
-                <span className={styles.decryptFail}>⚠ Could not decrypt</span>
+                <span className={styles.decryptFail}>Could not decrypt</span>
               ) : (
                 <span>{m.text}</span>
               )}

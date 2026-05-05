@@ -137,9 +137,9 @@ export function useAuth() {
     return res.user;
   }, [dispatch]);
 
-  const logoutAction = useCallback(async () => {
+  const logoutAction = useCallback(() => {
     wsManager.disconnect();
-    await api.logout().catch(() => {});
+    api.logout().catch(() => {});
     api.clearTokens();
     dispatch({ type: "LOGOUT" });
   }, [dispatch]);

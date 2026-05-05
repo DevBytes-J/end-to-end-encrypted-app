@@ -5,26 +5,40 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: #0f1117;
-  color: #6b7280;
+  background: var(--bg);
+  color: var(--text-muted);
   padding: 40px;
   text-align: center;
+  animation: fadeIn 0.3s ease both;
+}
+
+.iconWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wrap h2 {
   font-size: 22px;
-  font-weight: 700;
-  color: #f0f2f5;
+  font-weight: 800;
+  color: var(--text);
   margin: 0;
+  letter-spacing: -0.3px;
 }
 
 .wrap p {
   font-size: 14px;
   margin: 0;
-  max-width: 320px;
+  max-width: 300px;
+  line-height: 1.6;
 }
 
 .sub {
   font-size: 12px !important;
-  color: #4b5563 !important;
+  color: var(--text-sub) !important;
 }

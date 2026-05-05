@@ -7,6 +7,10 @@ interface Props {
   onSelect: (userId: string, displayName: string, username: string) => void;
 }
 
+const NexusIcon = () => (
+  <img src="/logo.png" alt="Nexus" width={26} height={26} style={{ borderRadius: '8px' }} />
+);
+
 export default function Sidebar({ onSelect }: Props) {
   const { state, dispatch } = useApp();
   const { logout } = useAuth();
@@ -22,23 +26,16 @@ export default function Sidebar({ onSelect }: Props) {
     } catch { /* ignore */ }
   }, [dispatch]);
 
-  useEffect(() => { 
-    loadConversations(); 
-  }, [loadConversations]);
+  useEffect(() => { loadConversations(); }, [loadConversations]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      if (!query.trim()) {
-        setSearchResults([]);
-        setSearchError("");
-        return;
-      }
+      if (!query.trim()) { setSearchResults([]); setSearchError(""); return; }
       setSearching(true);
       setSearchError("");
       (async () => {
         try {
-          const results = await api.searchUsers(query.trim());
-          setSearchResults(results);
+          setSearchResults(await api.searchUsers(query.trim()));
         } catch (e) {
           setSearchResults([]);
           setSearchError(e instanceof Error ? e.message : "Search failed");
@@ -63,11 +60,8 @@ export default function Sidebar({ onSelect }: Props) {
     <aside className={styles.sidebar}>
       <div className={styles.header}>
         <div className={styles.brand}>
-          <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="12" fill="#2563eb"/>
-            <path d="M20 10a7 7 0 0 0-7 7v2H11a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2v-2a7 7 0 0 0-7-7zm0 2a5 5 0 0 1 5 5v2H15v-2a5 5 0 0 1 5-5zm0 9a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" fill="white"/>
-          </svg>
-          <span>WhisperBox</span>
+          <NexusIcon />
+          <span>Nexus</span>
         </div>
         <button className={styles.logoutBtn} onClick={logout} title="Sign out">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -92,7 +86,7 @@ export default function Sidebar({ onSelect }: Props) {
         </svg>
         <input
           className={styles.search}
-          placeholder="Search users…"
+          placeholder="Search users..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -104,17 +98,15 @@ export default function Sidebar({ onSelect }: Props) {
       <ul className={styles.list}>
         {displayList.length === 0 && (
           <li className={styles.empty}>
-            {searchError ? <span style={{color:"#f87171"}}>{searchError}</span>
+            {searchError
+              ? <span style={{ color: "var(--error)" }}>{searchError}</span>
               : query.trim() ? "No users found" : "No conversations yet"}
           </li>
         )}
         {query.trim()
           ? (searchResults as api.UserPublicInfo[]).map((u) => (
-              <li
-                key={u.id}
-                className={`${styles.item} ${state.activeConversation === u.id ? styles.active : ""}`}
-                onClick={() => selectUser(u.id, u.display_name, u.username)}
-              >
+              <li key={u.id} className={`${styles.item} ${state.activeConversation === u.id ? styles.active : ""}`}
+                onClick={() => selectUser(u.id, u.display_name, u.username)}>
                 <div className={styles.itemAvatar}>{u.display_name[0].toUpperCase()}</div>
                 <div className={styles.itemInfo}>
                   <span className={styles.itemName}>{u.display_name}</span>
@@ -123,11 +115,8 @@ export default function Sidebar({ onSelect }: Props) {
               </li>
             ))
           : (state.conversations as api.ConversationSummary[]).map((c) => (
-              <li
-                key={c.user_id}
-                className={`${styles.item} ${state.activeConversation === c.user_id ? styles.active : ""}`}
-                onClick={() => selectUser(c.user_id, c.display_name, c.username)}
-              >
+              <li key={c.user_id} className={`${styles.item} ${state.activeConversation === c.user_id ? styles.active : ""}`}
+                onClick={() => selectUser(c.user_id, c.display_name, c.username)}>
                 <div className={styles.itemAvatar}>{c.display_name[0].toUpperCase()}</div>
                 <div className={styles.itemInfo}>
                   <span className={styles.itemName}>{c.display_name}</span>
